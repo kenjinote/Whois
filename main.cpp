@@ -1,8 +1,8 @@
 #define UNICODE
 #pragma comment(lib,"wsock32.lib")
-#include<windows.h>
-#include<winsock.h>
-#include"resource.h"
+#include <windows.h>
+#include <winsock.h>
+#include "resource.h"
 
 TCHAR szClassName[] = TEXT("Window");
 
@@ -220,14 +220,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-EXTERN_C void __cdecl WinMainCRTStartup()
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPreInst, LPSTR pCmdLine, int nCmdShow)
 {
 	WORD wVersionRequested = MAKEWORD(1, 1);
 	WSADATA wsaData;
+	MSG msg = { 0 };
 	if (WSAStartup(wVersionRequested, &wsaData) != SOCKET_ERROR)
 	{
-		MSG msg;
-		HINSTANCE hInstance = GetModuleHandle(0);
 		WNDCLASS wndclass = {
 			0,
 			WndProc,
@@ -266,9 +266,5 @@ EXTERN_C void __cdecl WinMainCRTStartup()
 		}
 		WSACleanup();
 	}
-	ExitProcess(0);
+	return msg.wParam;
 }
-
-#if _DEBUG
-void main(){}
-#endif
