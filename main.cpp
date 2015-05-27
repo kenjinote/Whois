@@ -1,5 +1,5 @@
 #define UNICODE
-#pragma comment(lib,"wsock32.lib")
+#pragma comment(lib,"wsock32")
 #include <windows.h>
 #include <winsock.h>
 #include "resource.h"
