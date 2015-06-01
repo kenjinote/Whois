@@ -4,10 +4,10 @@
 #include <winsock.h>
 #include "resource.h"
 
-TCHAR szClassName[] = TEXT("Window");
+TCHAR szClassName[] = TEXT("Whois");
 
-// •¶Žš—ñ’†‚Ì‰üs•¶ŽšLF(’Pˆê)‚ðCR+LF‚É•ÏŠ·‚·‚é
-// ¦V‚½‚Éƒoƒbƒtƒ@‚ðŠm•Û‚µ‚Ä‚¢‚é‚Ì‚ÅGlobalFreeŠÖ”‚ÅŠJ•ú‚·‚é•K—v‚ª‚ ‚é
+// æ–‡å­—åˆ—ä¸­ã®æ”¹è¡Œæ–‡å­—LF(å˜ä¸€)ã‚’CR+LFã«å¤‰æ›ã™ã‚‹
+// â€»æ–°ãŸã«ãƒãƒƒãƒ•ã‚¡ã‚’ç¢ºä¿ã—ã¦ã„ã‚‹ã®ã§GlobalFreeé–¢æ•°ã§é–‹æ”¾ã™ã‚‹å¿…è¦ãŒã‚ã‚‹
 LPTSTR TextConvertCRtoLFCR(IN LPTSTR pszTextIn)
 {
 	DWORD dwSize = 0;
@@ -38,7 +38,7 @@ LPTSTR TextConvertCRtoLFCR(IN LPTSTR pszTextIn)
 	return pszTextOut;
 }
 
-// •¶Žš—ñlpszText‚É'.'‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©
+// æ–‡å­—åˆ—lpszTextã«'.'ãŒå«ã¾ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹
 BOOL IsIncludingDot(IN LPCSTR lpszText)
 {
 	if (!lpszText) return FALSE;
@@ -49,8 +49,8 @@ BOOL IsIncludingDot(IN LPCSTR lpszText)
 	return FALSE;
 }
 
-// •¶Žš—ñlpszText‚ªƒzƒXƒg–¼‚ð•\‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
-// ƒzƒXƒg–¼¨TRUE IPƒAƒhƒŒƒX¨FALSE
+// æ–‡å­—åˆ—lpszTextãŒãƒ›ã‚¹ãƒˆåã‚’è¡¨ã—ã¦ã„ã‚‹ã‹ã©ã†ã‹
+// ãƒ›ã‚¹ãƒˆåâ†’TRUE IPã‚¢ãƒ‰ãƒ¬ã‚¹â†’FALSE
 BOOL IsHostName(IN LPCSTR lpszText)
 {
 	if (!lpszText) return FALSE;
@@ -62,7 +62,7 @@ BOOL IsHostName(IN LPCSTR lpszText)
 	return FALSE;
 }
 
-// “ü—ÍƒzƒXƒg–¼‚©‚ç–â‚¢‡‚í‚¹‚·‚éWhoisƒT[ƒo[–¼‚ð•Ô‚·
+// å…¥åŠ›ãƒ›ã‚¹ãƒˆåã‹ã‚‰å•ã„åˆã‚ã›ã™ã‚‹Whoisã‚µãƒ¼ãƒãƒ¼åã‚’è¿”ã™
 BOOL GetWhoisServerName(IN LPCSTR lpszHostName, OUT LPSTR lpszWhoisServerName)
 {
 	if (!lpszHostName) return FALSE;
@@ -83,8 +83,8 @@ BOOL GetWhoisServerName(IN LPCSTR lpszHostName, OUT LPSTR lpszWhoisServerName)
 	return FALSE;
 }
 
-// ƒzƒXƒg–¼‚©‚çWhoisî•ñ‚ðŽæ“¾‚·‚é
-// ¦V‚½‚Éƒoƒbƒtƒ@‚ðŠm•Û‚µ‚Ä‚¢‚é‚Ì‚ÅGlobalFreeŠÖ”‚ÅŠJ•ú‚·‚é•K—v‚ª‚ ‚é
+// ãƒ›ã‚¹ãƒˆåã‹ã‚‰Whoisæƒ…å ±ã‚’å–å¾—ã™ã‚‹
+// â€»æ–°ãŸã«ãƒãƒƒãƒ•ã‚¡ã‚’ç¢ºä¿ã—ã¦ã„ã‚‹ã®ã§GlobalFreeé–¢æ•°ã§é–‹æ”¾ã™ã‚‹å¿…è¦ãŒã‚ã‚‹
 LPWSTR GetWhoisText(IN LPCWSTR lpszHostName)
 {
 	char* lpszSrc = 0;
@@ -93,7 +93,7 @@ LPWSTR GetWhoisText(IN LPCWSTR lpszHostName)
 	char szBuf[1024];
 	WideCharToMultiByte(CP_ACP, 0, lpszHostName, -1, szBuf, 1024, 0, 0);
 	const BOOL bIsHostName = IsHostName(szBuf);
-	// ƒgƒbƒvƒŒƒxƒ‹ƒhƒƒCƒ“‚ªŽw’è‚³‚ê‚Ä‚¢‚È‚¢ê‡‚Í.jp‚ð•t‰Á‚·‚é
+	// ãƒˆãƒƒãƒ—ãƒ¬ãƒ™ãƒ«ãƒ‰ãƒ¡ã‚¤ãƒ³ãŒæŒ‡å®šã•ã‚Œã¦ã„ãªã„å ´åˆã¯.jpã‚’ä»˜åŠ ã™ã‚‹
 	if (bIsHostName && !IsIncludingDot(szBuf))
 	{
 		lstrcatA(szBuf, ".jp");
@@ -152,12 +152,12 @@ LPWSTR GetWhoisText(IN LPCWSTR lpszHostName)
 	}
 	if (lpszSrc)
 	{
-		// ISO-2022-JP ‚ð UNICODE ‚É•ÏŠ·‚·‚é
+		// ISO-2022-JP ã‚’ UNICODE ã«å¤‰æ›ã™ã‚‹
 		const DWORD dwSize = MultiByteToWideChar(50220, 0, lpszSrc, -1, 0, 0);
 		LPWSTR pwsz = (LPWSTR)GlobalAlloc(0, sizeof(WCHAR)*dwSize);
 		MultiByteToWideChar(50220, 0, lpszSrc, -1, pwsz, dwSize);
 		GlobalFree(lpszSrc);
-		// ‰üs•¶Žš LF ‚ð CR+LF ‚É•ÏŠ·‚·‚é
+		// æ”¹è¡Œæ–‡å­— LF ã‚’ CR+LF ã«å¤‰æ›ã™ã‚‹
 		LPTSTR p = TextConvertCRtoLFCR(pwsz);
 		GlobalFree(pwsz);
 		return p;
@@ -174,7 +174,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	switch (msg)
 	{
 	case WM_CREATE:
-		hFont = CreateFont(-16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TEXT("‚l‚r ƒSƒVƒbƒN"));
+		hFont = CreateFont(-16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TEXT("ï¼­ï¼³ ã‚´ã‚·ãƒƒã‚¯"));
 		hEdit = CreateWindowEx(WS_EX_CLIENTEDGE, TEXT("EDIT"), TEXT("BLOG.JP"),
 			WS_CHILD | WS_VISIBLE | WS_TABSTOP | ES_UPPERCASE, 0, 0, 0, 0,
 			hWnd, 0, ((LPCREATESTRUCT)(lParam))->hInstance, 0);
